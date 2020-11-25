@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title> My Angular Routing App </title>
+
+    <base href="/">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" > 
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css">
+
+    <style>
+      body {
+        padding-top: 50px;
+      }
+
+      #content-views {
+        position: relative;
+      }
+
+      .ng-enter,
+      .ng-leave {
+        width: 100%;
+        position: absolute;
+      }
+
+      .ng-enter {
+        -webkit-animation: zoomInDown 1.2s both ease-in;
+        -moz-animation: zoomInDown 1.2s both ease-in;
+        animation: zoomInDown 1.2s both ease-in;
+      }
+
+      .ng-leave {
+        -webkit-animation: zoomOutDown 0.5s both ease-in;
+        -moz-animation: zoomOutDown 0.5s both ease-in;
+        animation: zoomOutDown 0.5s both ease-in;
+      }
+    </style>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-route.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-animate.min.js"></script>
+    <script>
+      const app = angular.module('routerApp', ['ngRoute'])
+        .config(function($routeProvider) {
+          $routeProvider
+            .when('/', {
+              templateUrl: 'index.html',
+              controller: 'mainController',
+              controllerAs: 'main'
+            })
+            .when('/home', {
+              templateUrl: 'home.html',
+              controller: 'homeController',
+              controllerAs: 'home'
+            })
+            .when('/about', {
+              templateUrl: 'about.html',
+              controller: 'aboutController',
+              controllerAs: 'about'
+            })
+            .when('/contact', {
+              templateUrl: 'contact.html',
+              controller: 'contactController',
+              controllerAs: 'contact'
+            })
+        })
+
+      app.controller('mainController', function() {
+        const vm = this
+        vm.bigMessage = "Work with Angular Router"
+      })
+  
+      app.controller('homeController', function() {
+        const vm = this
+        vm.message = "Home Page"
+      })
+  
+      app.controller('aboutController', function() {
+        const vm = this
+        vm.message = "About Page"
+      })
+  
+      app.controller('contactController', function() {
+        const vm = this
+        vm.message = "Contact Page"
+      })
+    </script>
+
+  </head>
+  <body class="container" ng-app="routerApp" ng-controller="mainController as main">
+    <header>
+      <nav class="navbar navbar-default">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#/"> Angular Routing Example </a>
+        </div>
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="#/home"><i class="fa fa-home"></i> Home </a></li>
+          <li><a href="#/about"><i class="fa fa-shield"></i> About </a></li>
+          <li><a href="#/contact"><i class="fa fa-comment"></i> Contact </a></li>
+        </ul>
+      </nav>
+    </header>
+    <main>
+      <div class="bigClass">
+        <h1>{{ main.bigMessage }}</h1>
+      </div>
+      <div id="content-views">
+        <div ng-view> </div>
+      </div>
+    </main>
+  </body>
+
+</html>
